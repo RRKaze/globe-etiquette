@@ -8,9 +8,18 @@ import SidePanel from "./assets/globeEtiquette/SidePanel";
 
 export default function App() {
   const [theme, setThemeState] = useState("night");
-  const [panelState, setPanelState] = useState({ open: false, country: null, region: null, isRegionView: false });
+  const [panelState, setPanelState] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const country = params.get("country");
+    const match = country ? Object.keys(DATA).find(k => k.toLowerCase() === country.toLowerCase()) : null;
+    if (match) return { open: true, country: match, region: null, isRegionView: false };
+    return { open: false, country: null, region: null, isRegionView: false };
+  });
   const [activeTab, setActiveTab] = useState("guide");
-  const [zoomed, setZoomed] = useState(false);
+  const [zoomed, setZoomed] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return !!params.get("country");
+  });
   const mapRef = useRef(null);
   const geoLayerRef = useRef(null);
 
@@ -18,6 +27,17 @@ export default function App() {
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  // Sync country to URL
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (panelState.country) {
+      url.searchParams.set("country", panelState.country);
+    } else {
+      url.searchParams.delete("country");
+    }
+    window.history.replaceState(null, "", url);
+  }, [panelState.country]);
 
   const setTheme = (t) => setThemeState(t);
 
