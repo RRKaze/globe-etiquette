@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import { DATA } from "./data";
 import { GuideTab, RegionsTab, RegionGuideTab, InfoTab } from "./panelTabs";
 
@@ -14,11 +15,26 @@ export default function SidePanel({
   const d = country ? DATA[country] : null;
   const tabs = ["guide", "regions", "info"];
   const tabLabels = ["Cultural Guide", "States / Regions", "Quick Info"];
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = useCallback(() => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, []);
 
   return (
     <div className={`ge-panel${open ? " open" : ""}`}>
       <div className="ge-panel-header">
-        <button className="ge-back-btn" onClick={onClose}>← Back</button>
+        <div className="ge-panel-header-row">
+          <button className="ge-back-btn" onClick={onClose}>← Back</button>
+          {country && (
+            <button className="ge-copy-btn" onClick={handleCopyLink}>
+              {copied ? "✓ Copied!" : "🔗 Copy Link"}
+            </button>
+          )}
+        </div>
         <div>
           <span className="ge-panel-flag">{d?.flag || "🗺️"}</span>
           <span className="ge-panel-country">{isRegionView ? region : (country || "")}</span>

@@ -29,20 +29,28 @@ export function GuideTab({ country }) {
 }
 
 export function RegionsTab({ country, onRegionClick, onRegionEnter, onRegionLeave }) {
+  const d = DATA[country];
+  const regions = d?.regions || [];
   return (
     <>
       <div className="ge-section-label" style={{ marginBottom: 14 }}>States / Provinces / Regions</div>
-      <p style={{ color: "var(--text2)", fontSize: 14, marginTop: 2, marginBottom: 12 }}>
-        Region lists are not preloaded. Open a general regional guide for this country.
-      </p>
-      <button
-        className="ge-region-pill"
-        onClick={() => onRegionClick("General Region", country)}
-        onMouseEnter={() => onRegionEnter(country)}
-        onMouseLeave={() => onRegionLeave(country)}
-      >
-        📍 Open General Regional Guide
-      </button>
+      {regions.length === 0 ? (
+        <p style={{ color: "var(--text2)", fontSize: 14 }}>No regions available for this country yet.</p>
+      ) : (
+        <div className="ge-region-grid">
+          {regions.map(r => (
+            <button
+              key={r}
+              className="ge-region-pill"
+              onClick={() => onRegionClick(r, country)}
+              onMouseEnter={() => onRegionEnter(country)}
+              onMouseLeave={() => onRegionLeave(country)}
+            >
+              📍 {r}
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 }
