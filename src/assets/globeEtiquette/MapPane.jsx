@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { TILES } from "./data";
 import { getEffectiveTileTheme } from "./helpers";
 
@@ -7,6 +7,7 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
   const baseTileRef = useRef(null);
   const labelTileRef = useRef(null);
   const leafletLoadedRef = useRef(false);
+  const [loading, setLoading] = useState(true);
 
   const effectiveTileTheme = useCallback(() => getEffectiveTileTheme(theme), [theme]);
 
@@ -59,6 +60,7 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
       fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
         .then(r => r.json())
         .then(geojson => {
+          setLoading(false);
           const layer = L.geoJSON(geojson, {
             style: () => {
               const th = TILES[getEffectiveTileTheme(document.documentElement.getAttribute("data-theme") || "night")];
@@ -79,7 +81,7 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
           }).addTo(map);
           geoLayerRef.current = layer;
         })
-        .catch(() => {});
+        .catch(() => setLoading(false));
     };
 
     if (window.L) {
@@ -92,5 +94,15 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
     }
   }, [applyTiles, geoLayerRef, mapRef, onCountryClick]);
 
-  return <div id="ge-map" ref={containerRef} style={{ flex: 1, zIndex: 1 }} />;
+  return (
+    <div style={{ flex: 1, position: "relative", zIndex: 1 }}>
+      <div id="ge-map" ref={containerRef} style={{ width: "100%", height: "100%" }} />
+      {loading && (
+        <div className="ge-map-loading">
+          <div className="ge-map-spinner" />
+          <span>Loading map…</span>
+        </div>
+      )}
+    </div>
+  );
 }

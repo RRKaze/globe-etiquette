@@ -1,4 +1,4 @@
-import { DATA } from "./data";
+import { DATA, REGION_HIGHLIGHTS } from "./data";
 
 export function GuideTab({ country }) {
   const d = DATA[country];
@@ -56,26 +56,37 @@ export function RegionsTab({ country, onRegionClick, onRegionEnter, onRegionLeav
 }
 
 export function RegionGuideTab({ region, country }) {
+  const highlights = REGION_HIGHLIGHTS[country]?.[region];
+  const dos = highlights?.do ?? [
+    `Follow all national do's that apply in ${country}`,
+    `Check local laws — ${region} may have specific regional regulations`,
+    `Embrace local food, festivals, and dialect; regional pride runs strong`
+  ];
+  const donts = highlights?.dont ?? [
+    `Don't assume regional identity matches the national stereotype`,
+    `Don't ignore regional environmental or heritage site restrictions`
+  ];
   return (
     <>
       <div className="ge-section-label" style={{ marginBottom: 10 }}>Regional Highlights — {region}</div>
-      {[
-        `Follow all national do's that apply in ${country}`,
-        `Check local laws — ${region} may have specific regional regulations`,
-        `Embrace local food, festivals, and dialect; regional pride runs strong`
-      ].map((t, i) => (
-        <div key={i} className="ge-item do"><div className="ge-item-icon">✓</div><div className="ge-item-text">{t}</div></div>
-      ))}
-      <div className="ge-divider" />
-      {[
-        `Don't assume regional identity matches the national stereotype`,
-        `Don't ignore regional environmental or heritage site restrictions`
-      ].map((t, i) => (
-        <div key={i} className="ge-item dont"><div className="ge-item-icon">✕</div><div className="ge-item-text">{t}</div></div>
-      ))}
-      <div style={{ marginTop: 16, padding: 12, background: "var(--surface2)", borderRadius: 10, fontSize: 13, color: "var(--text2)" }}>
-        💡 Full regional guides with local nuances are being expanded. National rules for {country} still apply here.
+      <div style={{ marginBottom: 16 }}>
+        <div className="ge-section-label">✅ Do's</div>
+        {dos.map((t, i) => (
+          <div key={i} className="ge-item do"><div className="ge-item-icon">✓</div><div className="ge-item-text">{t}</div></div>
+        ))}
       </div>
+      <div className="ge-divider" />
+      <div>
+        <div className="ge-section-label">🚫 Don'ts</div>
+        {donts.map((t, i) => (
+          <div key={i} className="ge-item dont"><div className="ge-item-icon">✕</div><div className="ge-item-text">{t}</div></div>
+        ))}
+      </div>
+      {!highlights && (
+        <div style={{ marginTop: 16, padding: 12, background: "var(--surface2)", borderRadius: 10, fontSize: 13, color: "var(--text2)" }}>
+          💡 Detailed regional guides are being expanded. National rules for {country} still apply here.
+        </div>
+      )}
     </>
   );
 }

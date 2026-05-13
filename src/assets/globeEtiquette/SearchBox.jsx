@@ -78,6 +78,9 @@ export default function SearchBox({ onSelect }) {
               onMouseDown={() => handleSelect(item)}
               onMouseEnter={() => setActiveIndex(i)}
             >
+              <span className="ge-sug-flag">
+                {item.type === "country" ? (DATA[item.name]?.flag ?? "🌐") : (DATA[item.country]?.flag ?? "📍")}
+              </span>
               <strong>{item.name}</strong>
               <small>{item.type === "region" ? item.country : "Country"}</small>
             </div>
