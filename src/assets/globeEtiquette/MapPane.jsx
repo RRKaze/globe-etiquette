@@ -23,7 +23,7 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
     if (geoLayerRef.current) {
       geoLayerRef.current.setStyle(() => {
         const t = TILES[effectiveTileTheme()];
-        return { color: t.stroke, weight: 0.8, fillColor: t.fill, fillOpacity: 0.55, opacity: 0.8 };
+        return { color: t.stroke, weight: 0.8, fillColor: t.fill, fillOpacity: 0, opacity: 0.8 };
       });
     }
   }, [effectiveTileTheme, mapRef, geoLayerRef]);
@@ -64,7 +64,7 @@ export default function MapPane({ theme, onCountryClick, mapRef, geoLayerRef }) 
           const layer = L.geoJSON(geojson, {
             style: () => {
               const th = TILES[getEffectiveTileTheme(document.documentElement.getAttribute("data-theme") || "night")];
-              return { color: th.stroke, weight: 0.8, fillColor: th.fill, fillOpacity: 0.55, opacity: 0.8 };
+              return { color: th.stroke, weight: 0.8, fillColor: th.fill, fillOpacity: 0, opacity: 0.8 };
             },
             onEachFeature: (f, l) => {
               const name = f.properties.ADMIN || f.properties.name;
