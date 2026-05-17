@@ -533,14 +533,6 @@ export const REGION_HIGHLIGHTS = {
 };
 
 export const TILES = {
-  night:{
-    base:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-    labels:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-    fill:"#6f95bd", stroke:"#4f739b", hover:"#2f86f0"
-  },
-  day:{
-    base:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png",
-    labels:"https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
-    fill:"#b8ccdf", stroke:"#7a9fc0", hover:"#1d6fd4"
-  }
+  night:{ fill:"#e8e3db", hover:"#2f86f0" },
+  day:{ fill:"#f0ebe3", hover:"#1d6fd4" }
 };

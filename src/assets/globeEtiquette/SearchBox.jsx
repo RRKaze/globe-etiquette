@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { DATA } from "./data";
 import { buildSuggestions } from "./helpers";
+import { t } from "./i18n";
 
-export default function SearchBox({ onSelect }) {
+export default function SearchBox({ lang, onSelect }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [open, setOpen] = useState(false);
@@ -17,25 +18,19 @@ export default function SearchBox({ onSelect }) {
   }, [query]);
 
   useEffect(() => {
-    const handler = (e) => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
+    const handler = e => { if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false); };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const handleSelect = (item) => {
+  const handleSelect = item => {
     setQuery(item.type === "region" ? `${item.name}, ${item.country}` : item.name);
     setOpen(false);
     setActiveIndex(-1);
     onSelect(item);
   };
 
-  const handleClear = () => {
-    setQuery("");
-    setOpen(false);
-    setActiveIndex(-1);
-  };
-
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
       setActiveIndex(i => Math.min(i + 1, suggestions.length - 1));
@@ -49,7 +44,10 @@ export default function SearchBox({ onSelect }) {
       if (activeIndex >= 0 && suggestions[activeIndex]) {
         handleSelect(suggestions[activeIndex]);
       } else if (query.trim()) {
-        const key = Object.keys(DATA).find(k => k.toLowerCase() === query.trim().toLowerCase() || k.toLowerCase().includes(query.trim().toLowerCase()));
+        const key = Object.keys(DATA).find(k =>
+          k.toLowerCase() === query.trim().toLowerCase() ||
+          k.toLowerCase().includes(query.trim().toLowerCase())
+        );
         if (key) handleSelect({ type: "country", name: key });
       }
     }
@@ -60,14 +58,14 @@ export default function SearchBox({ onSelect }) {
       <span className="ge-search-icon">🔍</span>
       <input
         type="text"
-        placeholder="Search country or region…"
+        placeholder={t(lang, "search")}
         value={query}
         onChange={e => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         autoComplete="off"
       />
       {query && (
-        <button className="ge-search-clear" onClick={handleClear} aria-label="Clear search">✕</button>
+        <button className="ge-search-clear" onClick={() => { setQuery(""); setOpen(false); }} aria-label="Clear">✕</button>
       )}
       {open && (
         <div className="ge-suggestions">

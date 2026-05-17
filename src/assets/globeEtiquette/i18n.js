@@ -1,0 +1,100 @@
+export const LANGUAGES = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "zh", label: "中文",    flag: "🇨🇳" },
+];
+
+export const UI = {
+  en: {
+    subtitle:      "Cultural Do's & Don'ts",
+    search:        "Search country or region…",
+    hint:          "Hover any country to explore its cultural guide",
+    backToWorld:   "← Back to World View",
+    back:          "← Back",
+    copyLink:      "🔗 Copy Link",
+    copied:        "✓ Copied!",
+    tabGuide:      "Cultural Guide",
+    tabRegions:    "States / Regions",
+    tabInfo:       "Quick Info",
+    dos:           "Do's",
+    donts:         "Don'ts",
+    regionsLabel:  "States / Provinces / Regions",
+    noRegions:     "No regions available for this country yet.",
+    regionBack:    "Viewing regional guide for {region}. Go back to see all regions.",
+    infoLabel:     "Country Overview",
+    capital:       "Capital",
+    language:      "Official Language",
+    currency:      "Currency",
+    population:    "Population",
+    noGuide:       "No guide available for this location yet.",
+    noInfo:        "Info not available.",
+    regionNote:    "Detailed regional guides are being expanded. National rules for {country} still apply here.",
+    loading:       "Loading map…",
+    highlights:    "Regional Highlights — {region}",
+  },
+  es: {
+    subtitle:      "Qué hacer y no hacer",
+    search:        "Buscar país o región…",
+    hint:          "Pasa el cursor sobre un país para explorar su guía cultural",
+    backToWorld:   "← Volver al mapa mundial",
+    back:          "← Volver",
+    copyLink:      "🔗 Copiar enlace",
+    copied:        "✓ ¡Copiado!",
+    tabGuide:      "Guía Cultural",
+    tabRegions:    "Estados / Regiones",
+    tabInfo:       "Información",
+    dos:           "Recomendado",
+    donts:         "Evitar",
+    regionsLabel:  "Estados / Provincias / Regiones",
+    noRegions:     "Aún no hay regiones disponibles para este país.",
+    regionBack:    "Viendo guía regional de {region}. Vuelve para ver todas las regiones.",
+    infoLabel:     "Resumen del País",
+    capital:       "Capital",
+    language:      "Idioma oficial",
+    currency:      "Moneda",
+    population:    "Población",
+    noGuide:       "Aún no hay guía disponible para este lugar.",
+    noInfo:        "Información no disponible.",
+    regionNote:    "Las guías regionales están en expansión. Las reglas nacionales de {country} también aplican aquí.",
+    loading:       "Cargando mapa…",
+    highlights:    "Destacados regionales — {region}",
+  },
+  zh: {
+    subtitle:      "文化行为指南",
+    search:        "搜索国家或地区…",
+    hint:          "将鼠标悬停在任意国家，探索当地文化指南",
+    backToWorld:   "← 返回世界地图",
+    back:          "← 返回",
+    copyLink:      "🔗 复制链接",
+    copied:        "✓ 已复制！",
+    tabGuide:      "文化指南",
+    tabRegions:    "州 / 地区",
+    tabInfo:       "概览",
+    dos:           "应该做",
+    donts:         "避免",
+    regionsLabel:  "州 / 省 / 地区",
+    noRegions:     "该国暂无地区信息。",
+    regionBack:    "正在查看 {region} 的地区指南。返回查看所有地区。",
+    infoLabel:     "国家概览",
+    capital:       "首都",
+    language:      "官方语言",
+    currency:      "货币",
+    population:    "人口",
+    noGuide:       "该地区暂无文化指南。",
+    noInfo:        "暂无信息。",
+    regionNote:    "详细地区指南正在完善中。{country} 的国家规则在此同样适用。",
+    loading:       "地图加载中…",
+    highlights:    "地区特色 — {region}",
+  },
+};
+
+export function t(lang, key, vars = {}) {
+  let str = UI[lang]?.[key] ?? UI.en[key] ?? key;
+  Object.entries(vars).forEach(([k, v]) => { str = str.replace(`{${k}}`, v); });
+  return str;
+}
+
+export function detectLang() {
+  const browser = (navigator.language || navigator.languages?.[0] || "en").slice(0, 2).toLowerCase();
+  return ["en", "es", "zh"].includes(browser) ? browser : "en";
+}

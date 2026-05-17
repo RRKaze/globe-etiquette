@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { DATA } from "./data";
+import { t } from "./i18n";
 import { GuideTab, RegionsTab, RegionGuideTab, InfoTab } from "./panelTabs";
 
 export default function SidePanel({
@@ -8,13 +9,10 @@ export default function SidePanel({
   setActiveTab,
   onClose,
   onRegionClick,
-  onRegionEnter,
-  onRegionLeave
+  lang,
 }) {
   const { open, country, region, isRegionView } = panelState;
   const d = country ? DATA[country] : null;
-  const tabs = ["guide", "regions", "info"];
-  const tabLabels = ["Cultural Guide", "States / Regions", "Quick Info"];
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = useCallback(() => {
@@ -24,55 +22,75 @@ export default function SidePanel({
     });
   }, []);
 
+  const tabs = [
+    { key: "guide",   label: t(lang, "tabGuide")   },
+    { key: "regions", label: t(lang, "tabRegions")  },
+    { key: "info",    label: t(lang, "tabInfo")     },
+  ];
+
   return (
     <div className={`ge-panel${open ? " open" : ""}`}>
+
+      {/* ── Header ── */}
       <div className="ge-panel-header">
-        <div className="ge-panel-header-row">
-          <button className="ge-back-btn" onClick={onClose}>← Back</button>
-          {country && (
-            <button className="ge-copy-btn" onClick={handleCopyLink}>
-              {copied ? "✓ Copied!" : "🔗 Copy Link"}
-            </button>
-          )}
-        </div>
-        <div>
-          <span className="ge-panel-flag">{d?.flag || "🗺️"}</span>
-          <span className="ge-panel-country">{isRegionView ? region : (country || "")}</span>
-        </div>
-        <div className="ge-panel-region">
-          {isRegionView ? `${country} · ${d?.capital || ""}` : (d?.capital ? `Capital: ${d.capital}` : "")}
+        <div className="ge-panel-header-top">
+          <div className="ge-panel-identity">
+            <div className="ge-panel-flag-block">
+              {d?.flag ?? "🌍"}
+            </div>
+            <div className="ge-panel-title-group">
+              <div className="ge-panel-country">
+                {isRegionView ? region : (country ?? "")}
+              </div>
+              <div className="ge-panel-region">
+                {isRegionView
+                  ? `${country} · ${d?.capital ?? ""}`
+                  : d?.capital ? `${t(lang, "capital")}: ${d.capital}` : ""}
+              </div>
+            </div>
+          </div>
+          <div className="ge-panel-header-actions">
+            {country && (
+              <button className="ge-copy-btn" onClick={handleCopyLink}>
+                {copied ? t(lang, "copied") : t(lang, "copyLink")}
+              </button>
+            )}
+            <button className="ge-close-btn" onClick={onClose} aria-label="Close">✕</button>
+          </div>
         </div>
       </div>
 
+      {/* ── Tabs ── */}
       <div className="ge-tabs">
-        {tabs.map((t, i) => (
-          <button key={t} className={`ge-tab${activeTab === t ? " active" : ""}`} onClick={() => setActiveTab(t)}>
-            {tabLabels[i]}
+        {tabs.map(tab => (
+          <button
+            key={tab.key}
+            className={`ge-tab${activeTab === tab.key ? " active" : ""}`}
+            onClick={() => setActiveTab(tab.key)}
+          >
+            {tab.label}
           </button>
         ))}
       </div>
 
+      {/* ── Body ── */}
       <div className="ge-panel-body">
         {activeTab === "guide" && (
           isRegionView
-            ? <RegionGuideTab region={region} country={country} />
-            : <GuideTab country={country} />
+            ? <RegionGuideTab region={region} country={country} lang={lang} />
+            : <GuideTab country={country} lang={lang} />
         )}
         {activeTab === "regions" && !isRegionView && (
-          <RegionsTab
-            country={country}
-            onRegionClick={onRegionClick}
-            onRegionEnter={onRegionEnter}
-            onRegionLeave={onRegionLeave}
-          />
+          <RegionsTab country={country} lang={lang} onRegionClick={onRegionClick} />
         )}
         {activeTab === "regions" && isRegionView && (
           <p style={{ color: "var(--text2)", fontSize: 14, paddingTop: 8 }}>
-            Viewing regional guide for {region}. Go back to see all regions.
+            {t(lang, "regionBack", { region })}
           </p>
         )}
-        {activeTab === "info" && <InfoTab country={country} />}
+        {activeTab === "info" && <InfoTab country={country} lang={lang} />}
       </div>
+
     </div>
   );
 }
