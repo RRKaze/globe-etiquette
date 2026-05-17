@@ -1,13 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./assets/globeEtiquette/styles.css";
-import { DATA, COUNTRY_COORDS, TILES } from "./assets/globeEtiquette/data";
+import { DATA, COUNTRY_COORDS } from "./assets/globeEtiquette/data";
 import { getEffectiveTileTheme } from "./assets/globeEtiquette/helpers";
+import { t, detectLang } from "./assets/globeEtiquette/i18n";
 import SearchBox from "./assets/globeEtiquette/SearchBox";
 import MapPane from "./assets/globeEtiquette/MapPane";
 import SidePanel from "./assets/globeEtiquette/SidePanel";
+import LanguageSelector from "./assets/globeEtiquette/LanguageSelector";
 
 export default function App() {
-  const [theme, setThemeState] = useState("night");
+  const [theme, setTheme] = useState("night");
+  const [lang, setLang] = useState(detectLang);
   const [panelState, setPanelState] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     const country = params.get("country");
@@ -16,62 +19,29 @@ export default function App() {
     return { open: false, country: null, region: null, isRegionView: false };
   });
   const [activeTab, setActiveTab] = useState("guide");
-  const [zoomed, setZoomed] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    return !!params.get("country");
-  });
+  const [zoomed, setZoomed] = useState(() => !!new URLSearchParams(window.location.search).get("country"));
   const mapRef = useRef(null);
   const geoLayerRef = useRef(null);
 
-  // Apply data-theme to <html>
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
-  // Sync country to URL
   useEffect(() => {
     const url = new URL(window.location.href);
-    if (panelState.country) {
-      url.searchParams.set("country", panelState.country);
-    } else {
-      url.searchParams.delete("country");
-    }
+    if (panelState.country) url.searchParams.set("country", panelState.country);
+    else url.searchParams.delete("country");
     window.history.replaceState(null, "", url);
   }, [panelState.country]);
 
-  const setTheme = (t) => setThemeState(t);
-
-  const findLayerByName = useCallback((name) => {
-    let found = null;
-    geoLayerRef.current?.eachLayer(l => {
-      const n = l.feature?.properties?.ADMIN || l.feature?.properties?.name || "";
-      if (n.toLowerCase() === name.toLowerCase()) found = l;
-    });
-    return found;
-  }, []);
-
-  const highlightCountry = useCallback((name) => {
-    const l = findLayerByName(name);
-    if (l) {
-      const th = TILES[getEffectiveTileTheme(theme)];
-      l.setStyle({ fillColor: th.hover, fillOpacity: 0.75, weight: 1.5 });
-    }
-  }, [findLayerByName, theme]);
-
-  const unhighlightCountry = useCallback((name) => {
-    const l = findLayerByName(name);
-    if (l) geoLayerRef.current?.resetStyle(l);
-  }, [findLayerByName]);
-
+  // Open sidebar for a country — zoom only when bounds provided (click), not on hover
   const openCountry = useCallback((name, bounds) => {
-    const match = Object.keys(DATA).find(k => k.toLowerCase() === name.toLowerCase() || name.toLowerCase().includes(k.toLowerCase()));
+    const match = Object.keys(DATA).find(
+      k => k.toLowerCase() === name.toLowerCase() || name.toLowerCase().includes(k.toLowerCase())
+    );
     if (bounds) mapRef.current?.fitBounds(bounds, { padding: [40, 40] });
     setZoomed(true);
-    if (match) {
-      setPanelState({ open: true, country: match, region: null, isRegionView: false });
-    } else {
-      setPanelState({ open: true, country: name, region: null, isRegionView: false });
-    }
+    setPanelState({ open: true, country: match ?? name, region: null, isRegionView: false });
     setActiveTab("guide");
   }, []);
 
@@ -90,7 +60,7 @@ export default function App() {
     setPanelState({ open: false, country: null, region: null, isRegionView: false });
   }, []);
 
-  const handleSearchSelect = useCallback((item) => {
+  const handleSearchSelect = useCallback(item => {
     if (item.type === "country") {
       const coords = COUNTRY_COORDS[item.name];
       if (coords) mapRef.current?.setView([coords[0], coords[1]], coords[2]);
@@ -106,9 +76,9 @@ export default function App() {
   }, [openRegion]);
 
   const themeOptions = [
-    { key: "day", label: "☀️ Day" },
-    { key: "night", label: "🌙 Night" },
-    { key: "system", label: "⚙️ System" }
+    { key: "day",    label: "☀️ Day"    },
+    { key: "night",  label: "🌙 Night"  },
+    { key: "system", label: "⚙️ System" },
   ];
 
   return (
@@ -118,9 +88,10 @@ export default function App() {
           <div className="ge-logo-icon">🌍</div>
           <div>
             <div className="ge-logo-text">GlobeEtiquette</div>
-            <div className="ge-logo-sub">Cultural Do's & Don'ts</div>
+            <div className="ge-logo-sub">{t(lang, "subtitle")}</div>
           </div>
         </div>
+
         <div className="ge-header-right">
           <div className="ge-theme-toggle">
             {themeOptions.map(opt => (
@@ -133,24 +104,26 @@ export default function App() {
               </button>
             ))}
           </div>
-          <SearchBox onSelect={handleSearchSelect} />
+          <SearchBox lang={lang} onSelect={handleSearchSelect} />
+          <LanguageSelector lang={lang} onChange={setLang} />
         </div>
       </header>
 
       <MapPane
+        lang={lang}
         theme={theme}
-        onCountryClick={openCountry}
+        onCountryOpen={openCountry}
         mapRef={mapRef}
         geoLayerRef={geoLayerRef}
       />
 
       <div className={`ge-hint${zoomed ? " hidden" : ""}`}>
-        Click any country to explore its cultural guide
+        {t(lang, "hint")}
       </div>
 
       {zoomed && (
         <button className="ge-globe-btn" onClick={resetView}>
-          ← Back to World View
+          {t(lang, "backToWorld")}
         </button>
       )}
 
@@ -160,8 +133,7 @@ export default function App() {
         setActiveTab={setActiveTab}
         onClose={closePanel}
         onRegionClick={openRegion}
-        onRegionEnter={highlightCountry}
-        onRegionLeave={unhighlightCountry}
+        lang={lang}
       />
     </div>
   );
