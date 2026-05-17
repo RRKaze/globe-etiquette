@@ -19,7 +19,11 @@ export default function App() {
     return { open: false, country: null, region: null, isRegionView: false };
   });
   const [activeTab, setActiveTab] = useState("guide");
-  const [zoomed, setZoomed] = useState(() => !!new URLSearchParams(window.location.search).get("country"));
+  const [zoomed, setZoomed] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const country = params.get("country");
+    return !!country && Object.keys(DATA).some(k => k.toLowerCase() === country.toLowerCase());
+  });
   const mapRef = useRef(null);
   const geoLayerRef = useRef(null);
 
@@ -34,12 +38,27 @@ export default function App() {
     window.history.replaceState(null, "", url);
   }, [panelState.country]);
 
-  // Open sidebar for a country — zoom only when bounds provided (click), not on hover
+  // Open sidebar for a country — zoom to bounds on click
   const openCountry = useCallback((name, bounds) => {
     const match = Object.keys(DATA).find(
       k => k.toLowerCase() === name.toLowerCase() || name.toLowerCase().includes(k.toLowerCase())
     );
-    if (bounds) mapRef.current?.fitBounds(bounds, { padding: [40, 40] });
+    if (bounds && mapRef.current) {
+      const map = mapRef.current;
+      const rawZoom = map.getBoundsZoom(bounds);
+      if (rawZoom < 3) {
+        // Very large country — fitBounds zooms to world view due to wide bounds (antimeridian).
+        // Use COUNTRY_COORDS if known, otherwise fall back to bounds center at zoom 3.
+        const coords = COUNTRY_COORDS[match ?? name];
+        if (coords) {
+          map.setView([coords[0], coords[1]], coords[2], { animate: true });
+        } else {
+          map.setView(bounds.getCenter(), 3, { animate: true });
+        }
+      } else {
+        map.fitBounds(bounds, { paddingTopLeft: [60, 60], paddingBottomRight: [480, 60] });
+      }
+    }
     setZoomed(true);
     setPanelState({ open: true, country: match ?? name, region: null, isRegionView: false });
     setActiveTab("guide");
@@ -115,6 +134,7 @@ export default function App() {
         onCountryOpen={openCountry}
         mapRef={mapRef}
         geoLayerRef={geoLayerRef}
+        initialCountry={panelState.country}
       />
 
       <div className={`ge-hint${zoomed ? " hidden" : ""}`}>
