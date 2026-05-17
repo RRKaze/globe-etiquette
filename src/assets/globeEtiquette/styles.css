@@ -87,7 +87,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 #ge-map{z-index:1}
 [data-theme="day"]    .leaflet-container{background:#c9dde8!important}
 [data-theme="night"]  .leaflet-container,
-                      .leaflet-container{background:#b8cdd8!important}
+                      .leaflet-container{background:#5c7a96!important}
 [data-theme="system"] .leaflet-container{background:#c9dde8!important}
 
 /* ── Hint & back button ──────────────────────── */
@@ -149,6 +149,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-welcome{padding:20px 0;text-align:center;color:var(--text2)}
 .ge-welcome-icon{font-size:40px;margin-bottom:12px}
 .ge-welcome-text{font-size:14px;line-height:1.6}
+
+/* ── Country name labels ─────────────────────── */
+.leaflet-tooltip.ge-country-label{
+  background:transparent;border:none;box-shadow:none;padding:0;
+  font-family:'DM Sans',sans-serif;font-weight:700;text-transform:uppercase;
+  color:rgba(40,32,24,0.88);
+  text-shadow:0 0 4px rgba(255,255,255,1),0 0 10px rgba(255,255,255,0.85);
+  pointer-events:none;white-space:nowrap;
+}
+.leaflet-tooltip.ge-country-label::before{display:none}
+.leaflet-tooltip.ge-country-label-xl{font-size:14px;letter-spacing:1.8px}
+.leaflet-tooltip.ge-country-label-lg{font-size:12px;letter-spacing:1.2px}
+.leaflet-tooltip.ge-country-label-md{font-size:10px;letter-spacing:0.8px}
+.leaflet-tooltip.ge-country-label-sm{font-size:9px;letter-spacing:0.4px}
 
 /* ── Map loading overlay ─────────────────────── */
 .ge-map-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--bg);opacity:.9;pointer-events:none;z-index:500}

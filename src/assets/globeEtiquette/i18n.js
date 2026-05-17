@@ -8,7 +8,7 @@ export const UI = {
   en: {
     subtitle:      "Cultural Do's & Don'ts",
     search:        "Search country or region…",
-    hint:          "Hover any country to explore its cultural guide",
+    hint:          "Click any country to explore its cultural guide",
     backToWorld:   "← Back to World View",
     back:          "← Back",
     copyLink:      "🔗 Copy Link",
@@ -35,7 +35,7 @@ export const UI = {
   es: {
     subtitle:      "Qué hacer y no hacer",
     search:        "Buscar país o región…",
-    hint:          "Pasa el cursor sobre un país para explorar su guía cultural",
+    hint:          "Haz clic en un país para explorar su guía cultural",
     backToWorld:   "← Volver al mapa mundial",
     back:          "← Volver",
     copyLink:      "🔗 Copiar enlace",
@@ -62,7 +62,7 @@ export const UI = {
   zh: {
     subtitle:      "文化行为指南",
     search:        "搜索国家或地区…",
-    hint:          "将鼠标悬停在任意国家，探索当地文化指南",
+    hint:          "点击任意国家，探索当地文化指南",
     backToWorld:   "← 返回世界地图",
     back:          "← 返回",
     copyLink:      "🔗 复制链接",

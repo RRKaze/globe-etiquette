@@ -421,12 +421,14 @@ export const DATA = {
 
 export const COUNTRY_COORDS = {
   "Japan":[35.7,139.7,5],"France":[46.2,2.2,5],"India":[20.6,78.9,4],
-  "United States":[37.1,-95.7,4],"Brazil":[-10,-55,4],"Saudi Arabia":[24,45,5],
+  "United States":[38,-97,4],"Brazil":[-10,-55,4],"Saudi Arabia":[24,45,5],
   "Germany":[51.2,10.5,5],"Thailand":[15.9,100.9,5],"China":[35,105,4],
   "Australia":[-25,133,4],"Mexico":[23,-102,5],
   "Italy":[41.9,12.5,5],"United Kingdom":[54.7,-3.4,5],"South Korea":[36.5,127.9,6],
   "United Arab Emirates":[24,54,6],"Turkey":[39,35,5],"Indonesia":[-2,118,4],
-  "South Africa":[-29,25,5],"Argentina":[-38,-65,4]
+  "South Africa":[-29,25,5],"Argentina":[-38,-65,4],
+  "Russia":[62,95,3],"Canada":[60,-96,3],"Kazakhstan":[48,68,4],
+  "Algeria":[28,2,4],"Democratic Republic of the Congo":[-3,24,4]
 };
 
 export const REGION_HIGHLIGHTS = {
@@ -533,6 +535,6 @@ export const REGION_HIGHLIGHTS = {
 };
 
 export const TILES = {
-  night:{ fill:"#e8e3db", hover:"#2f86f0" },
-  day:{ fill:"#f0ebe3", hover:"#1d6fd4" }
+  night:{ fill:"#b8b2a8", hover:"#2f86f0", border:"#7a7268" },
+  day:{   fill:"#f0ebe3", hover:"#1d6fd4", border:"#8a8070" }
 };
