@@ -222,3 +222,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-phrase-label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);margin-bottom:4px}
 .ge-phrase-native{font-size:17px;color:var(--text);font-weight:500}
 .ge-phrase-romanized{font-size:12px;color:var(--text2);margin-top:3px;font-style:italic}
+
+/* ── Compare modal ───────────────────────────── */
+.ge-compare-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.ge-compare-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:900px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow)}
+.ge-compare-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.ge-compare-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)}
+.ge-compare-body{display:flex;flex:1;overflow:hidden}
+.ge-compare-col{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.ge-compare-col::-webkit-scrollbar{width:4px}
+.ge-compare-col::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.ge-compare-divider{width:1px;background:var(--border);flex-shrink:0}
+.ge-compare-col-header{display:flex;align-items:center;gap:10px;padding-bottom:4px}
+.ge-compare-flag{font-size:24px}
+.ge-compare-name{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)}
+.ge-compare-select{width:100%;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;cursor:pointer;flex-shrink:0}
+.ge-compare-guide{display:flex;flex-direction:column;gap:0}
+.ge-compare-empty{font-size:13px;color:var(--text2);line-height:1.6;padding:8px 0}

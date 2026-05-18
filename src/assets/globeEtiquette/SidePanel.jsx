@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { DATA } from "./data";
 import { t } from "./i18n";
 import { GuideTab, RegionsTab, RegionGuideTab, InfoTab, PhrasesTab } from "./panelTabs";
+import CompareModal from "./CompareModal";
 
 export default function SidePanel({
   panelState,
@@ -16,6 +17,7 @@ export default function SidePanel({
   const { open, country, region, isRegionView } = panelState;
   const d = country ? DATA[country] : null;
   const [copied, setCopied] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
 
   const handleCopyLink = useCallback(() => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -32,6 +34,7 @@ export default function SidePanel({
   ];
 
   return (
+    <>
     <div className={`ge-panel${open ? " open" : ""}`}>
 
       {/* ── Header ── */}
@@ -61,6 +64,9 @@ export default function SidePanel({
               >
                 {isFavorite(country) ? "★" : "☆"}
               </button>
+            )}
+            {country && (
+              <button className="ge-copy-btn" onClick={() => setCompareOpen(true)}>⚖ Compare</button>
             )}
             {country && (
               <button className="ge-copy-btn" onClick={handleCopyLink}>
@@ -105,5 +111,9 @@ export default function SidePanel({
       </div>
 
     </div>
+    {compareOpen && country && (
+      <CompareModal countryA={country} onClose={() => setCompareOpen(false)} lang={lang} />
+    )}
+    </>
   );
 }
