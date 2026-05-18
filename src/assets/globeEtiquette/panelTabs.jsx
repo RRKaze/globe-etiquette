@@ -98,6 +98,25 @@ export function RegionGuideTab({ region, country, lang }) {
   );
 }
 
+export function PhrasesTab({ country, lang }) {
+  const d = DATA[country];
+  if (!d?.phrases) return <p style={{color:"var(--text2)",fontSize:14,paddingTop:8}}>{t(lang,"noGuide")}</p>;
+  return (
+    <>
+      <div className="ge-section-label" style={{marginBottom:14}}>{t(lang,"tabPhrases")}</div>
+      <div className="ge-phrases-list">
+        {d.phrases.map((p,i) => (
+          <div key={i} className="ge-phrase-row">
+            <div className="ge-phrase-label">{p.label}</div>
+            <div className="ge-phrase-native">{p.native}</div>
+            {p.romanized && <div className="ge-phrase-romanized">{p.romanized}</div>}
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
 export function InfoTab({ country, lang }) {
   const d = DATA[country];
   if (!d) return <p style={{ color: "var(--text2)", fontSize: 14, paddingTop: 8 }}>{t(lang, "noInfo")}</p>;

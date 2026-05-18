@@ -208,3 +208,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
   .ge-globe-btn{left:12px;bottom:16px;font-size:13px;padding:8px 14px}
   .ge-hint{bottom:16px;font-size:12px;padding:6px 14px}
 }
+
+/* ── Phrases Tab ─────────────────────────────── */
+.ge-phrases-list{display:flex;flex-direction:column;gap:10px}
+.ge-phrase-row{background:var(--surface2);border-radius:10px;padding:12px 14px}
+.ge-phrase-label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);margin-bottom:4px}
+.ge-phrase-native{font-size:17px;color:var(--text);font-weight:500}
+.ge-phrase-romanized{font-size:12px;color:var(--text2);margin-top:3px;font-style:italic}

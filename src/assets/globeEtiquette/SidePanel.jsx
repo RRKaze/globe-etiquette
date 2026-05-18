@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { DATA } from "./data";
 import { t } from "./i18n";
-import { GuideTab, RegionsTab, RegionGuideTab, InfoTab } from "./panelTabs";
+import { GuideTab, RegionsTab, RegionGuideTab, InfoTab, PhrasesTab } from "./panelTabs";
 
 export default function SidePanel({
   panelState,
@@ -28,6 +28,7 @@ export default function SidePanel({
     { key: "guide",   label: t(lang, "tabGuide")   },
     { key: "regions", label: t(lang, "tabRegions")  },
     { key: "info",    label: t(lang, "tabInfo")     },
+    { key: "phrases", label: t(lang, "tabPhrases")  },
   ];
 
   return (
@@ -100,6 +101,7 @@ export default function SidePanel({
           </p>
         )}
         {activeTab === "info" && <InfoTab country={country} lang={lang} />}
+        {activeTab === "phrases" && <PhrasesTab country={country} lang={lang} />}
       </div>
 
     </div>

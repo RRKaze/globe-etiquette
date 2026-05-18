@@ -19,7 +19,15 @@ export const DATA = {
       "Don't speak loudly on the phone while on trains or buses",
       "Don't pass food chopstick-to-chopstick — also a funeral custom"
     ],
-    regions:["Tokyo","Osaka","Kyoto","Hokkaido","Okinawa","Hiroshima","Fukuoka"]
+    regions:["Tokyo","Osaka","Kyoto","Hokkaido","Okinawa","Hiroshima","Fukuoka"],
+    phrases:[
+      {label:"Hello",        native:"こんにちは",  romanized:"Konnichiwa"},
+      {label:"Thank you",    native:"ありがとうございます", romanized:"Arigatou gozaimasu"},
+      {label:"Excuse me",    native:"すみません",  romanized:"Sumimasen"},
+      {label:"Help!",        native:"助けて！",    romanized:"Tasukete!"},
+      {label:"Please",       native:"お願いします", romanized:"Onegaishimasu"},
+      {label:"Sorry",        native:"ごめんなさい", romanized:"Gomennasai"},
+    ]
   },
   "France": {
     flag:"🇫🇷", capital:"Paris", language:"French", currency:"Euro (€)", population:"68M",
@@ -41,7 +49,15 @@ export const DATA = {
       "Don't chew gum while speaking to someone — considered disrespectful",
       "Don't walk into a boulangerie and not buy anything just to browse"
     ],
-    regions:["Île-de-France","Normandy","Provence","Brittany","Alsace","Corsica","Loire Valley"]
+    regions:["Île-de-France","Normandy","Provence","Brittany","Alsace","Corsica","Loire Valley"],
+    phrases:[
+      {label:"Hello",        native:"Bonjour"},
+      {label:"Thank you",    native:"Merci"},
+      {label:"Excuse me",    native:"Excusez-moi"},
+      {label:"Help!",        native:"Au secours !"},
+      {label:"Please",       native:"S'il vous plaît"},
+      {label:"Sorry",        native:"Pardon"},
+    ]
   },
   "India": {
     flag:"🇮🇳", capital:"New Delhi", language:"Hindi, English + 20 others", currency:"Rupee (₹)", population:"1.4B",
@@ -63,7 +79,15 @@ export const DATA = {
       "Don't refuse prasad (temple food offering) at a religious site",
       "Don't waste food — it is considered disrespectful and sinful"
     ],
-    regions:["Maharashtra","Rajasthan","Kerala","Tamil Nadu","Delhi","Goa","West Bengal"]
+    regions:["Maharashtra","Rajasthan","Kerala","Tamil Nadu","Delhi","Goa","West Bengal"],
+    phrases:[
+      {label:"Hello",        native:"नमस्ते",      romanized:"Namaste"},
+      {label:"Thank you",    native:"धन्यवाद",     romanized:"Dhanyavaad"},
+      {label:"Excuse me",    native:"माफ़ करें",    romanized:"Maaf karein"},
+      {label:"Help!",        native:"मदद करो!",    romanized:"Madad karo!"},
+      {label:"Please",       native:"कृपया",       romanized:"Kripaya"},
+      {label:"Sorry",        native:"माफ़ करना",    romanized:"Maaf karna"},
+    ]
   },
   "United States": {
     flag:"🇺🇸", capital:"Washington D.C.", language:"English", currency:"Dollar ($)", population:"331M",
@@ -85,7 +109,15 @@ export const DATA = {
       "Don't be overly casual with police — remain calm and cooperative",
       "Don't litter — fines can be steep and locals take pride in cleanliness"
     ],
-    regions:["California","Texas","New York","Florida","Washington","Illinois","Hawaii","Alaska"]
+    regions:["California","Texas","New York","Florida","Washington","Illinois","Hawaii","Alaska"],
+    phrases:[
+      {label:"Hello",        native:"Hello"},
+      {label:"Thank you",    native:"Thank you"},
+      {label:"Excuse me",    native:"Excuse me"},
+      {label:"Help!",        native:"Help!"},
+      {label:"Please",       native:"Please"},
+      {label:"Sorry",        native:"Sorry"},
+    ]
   },
   "Brazil": {
     flag:"🇧🇷", capital:"Brasília", language:"Portuguese", currency:"Real (R$)", population:"215M",
@@ -107,7 +139,15 @@ export const DATA = {
       "Don't ignore safety advice in unfamiliar urban neighborhoods",
       "Don't show impatience if things run late — it's culturally normal"
     ],
-    regions:["São Paulo","Rio de Janeiro","Bahia","Amazonas","Minas Gerais","Pernambuco","Santa Catarina"]
+    regions:["São Paulo","Rio de Janeiro","Bahia","Amazonas","Minas Gerais","Pernambuco","Santa Catarina"],
+    phrases:[
+      {label:"Hello",        native:"Olá"},
+      {label:"Thank you",    native:"Obrigado / Obrigada"},
+      {label:"Excuse me",    native:"Com licença"},
+      {label:"Help!",        native:"Socorro!"},
+      {label:"Please",       native:"Por favor"},
+      {label:"Sorry",        native:"Desculpe"},
+    ]
   },
   "Saudi Arabia": {
     flag:"🇸🇦", capital:"Riyadh", language:"Arabic", currency:"Riyal (SAR)", population:"35M",
@@ -129,7 +169,15 @@ export const DATA = {
       "Don't wear revealing clothing in public areas",
       "Don't schedule important meetings on Fridays — it is the holy day"
     ],
-    regions:["Riyadh Province","Mecca","Medina","Eastern Province","Asir","Tabuk","Hail"]
+    regions:["Riyadh Province","Mecca","Medina","Eastern Province","Asir","Tabuk","Hail"],
+    phrases:[
+      {label:"Hello",        native:"السلام عليكم",  romanized:"As-salamu alaykum"},
+      {label:"Thank you",    native:"شكراً",          romanized:"Shukran"},
+      {label:"Excuse me",    native:"عفواً",          romanized:"Afwan"},
+      {label:"Help!",        native:"النجدة!",        romanized:"An-najda!"},
+      {label:"Please",       native:"من فضلك",        romanized:"Min fadlak"},
+      {label:"Sorry",        native:"آسف",            romanized:"Aasif"},
+    ]
   },
   "Germany": {
     flag:"🇩🇪", capital:"Berlin", language:"German", currency:"Euro (€)", population:"84M",
@@ -151,7 +199,15 @@ export const DATA = {
       "Don't mow your lawn or make loud noise on Sundays",
       "Don't refuse a handshake — it is considered extremely rude"
     ],
-    regions:["Bavaria","Berlin","Hamburg","Baden-Württemberg","North Rhine-Westphalia","Saxony","Thuringia"]
+    regions:["Bavaria","Berlin","Hamburg","Baden-Württemberg","North Rhine-Westphalia","Saxony","Thuringia"],
+    phrases:[
+      {label:"Hello",        native:"Hallo"},
+      {label:"Thank you",    native:"Danke schön"},
+      {label:"Excuse me",    native:"Entschuldigung"},
+      {label:"Help!",        native:"Hilfe!"},
+      {label:"Please",       native:"Bitte"},
+      {label:"Sorry",        native:"Es tut mir leid"},
+    ]
   },
   "Thailand": {
     flag:"🇹🇭", capital:"Bangkok", language:"Thai", currency:"Baht (฿)", population:"70M",
@@ -173,7 +229,15 @@ export const DATA = {
       "Don't bargain aggressively or rudely at markets",
       "Don't make physical contact with monks if you are a woman"
     ],
-    regions:["Bangkok","Chiang Mai","Phuket","Pattaya","Krabi","Koh Samui","Ayutthaya"]
+    regions:["Bangkok","Chiang Mai","Phuket","Pattaya","Krabi","Koh Samui","Ayutthaya"],
+    phrases:[
+      {label:"Hello",        native:"สวัสดี",         romanized:"Sawasdee"},
+      {label:"Thank you",    native:"ขอบคุณ",         romanized:"Khob khun"},
+      {label:"Excuse me",    native:"ขอโทษ",          romanized:"Kho thot"},
+      {label:"Help!",        native:"ช่วยด้วย!",       romanized:"Chuay duay!"},
+      {label:"Please",       native:"กรุณา",          romanized:"Karuna"},
+      {label:"Sorry",        native:"ขอโทษ",          romanized:"Kho thot"},
+    ]
   },
   "China": {
     flag:"🇨🇳", capital:"Beijing", language:"Mandarin", currency:"Yuan (¥)", population:"1.4B",
@@ -195,7 +259,15 @@ export const DATA = {
       "Don't wrap gifts in white or black — they are associated with mourning",
       "Don't refuse food offered by a host — it is considered very rude"
     ],
-    regions:["Beijing","Shanghai","Guangdong","Sichuan","Xinjiang","Tibet","Yunnan"]
+    regions:["Beijing","Shanghai","Guangdong","Sichuan","Xinjiang","Tibet","Yunnan"],
+    phrases:[
+      {label:"Hello",        native:"你好",     romanized:"Nǐ hǎo"},
+      {label:"Thank you",    native:"谢谢",     romanized:"Xièxiè"},
+      {label:"Excuse me",    native:"对不起",   romanized:"Duìbuqǐ"},
+      {label:"Help!",        native:"救命！",   romanized:"Jiùmìng!"},
+      {label:"Please",       native:"请",       romanized:"Qǐng"},
+      {label:"Sorry",        native:"对不起",   romanized:"Duìbuqǐ"},
+    ]
   },
   "Australia": {
     flag:"🇦🇺", capital:"Canberra", language:"English", currency:"AUD ($)", population:"26M",
@@ -217,7 +289,15 @@ export const DATA = {
       "Don't refer to New Zealanders as Australians — they are very different cultures",
       "Don't be overly formal or stiff in casual social settings"
     ],
-    regions:["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Northern Territory"]
+    regions:["New South Wales","Victoria","Queensland","Western Australia","South Australia","Tasmania","Northern Territory"],
+    phrases:[
+      {label:"Hello",        native:"Hello"},
+      {label:"Thank you",    native:"Thank you"},
+      {label:"Excuse me",    native:"Excuse me"},
+      {label:"Help!",        native:"Help!"},
+      {label:"Please",       native:"Please"},
+      {label:"Sorry",        native:"Sorry"},
+    ]
   },
   "Mexico": {
     flag:"🇲🇽", capital:"Mexico City", language:"Spanish", currency:"Peso (MXN)", population:"130M",
@@ -239,7 +319,15 @@ export const DATA = {
       "Don't drink tap water in most cities — use bottled water",
       "Don't disrespect religious processions or ceremonies in public spaces"
     ],
-    regions:["Mexico City","Jalisco","Oaxaca","Yucatan","Quintana Roo","Chiapas","Baja California"]
+    regions:["Mexico City","Jalisco","Oaxaca","Yucatan","Quintana Roo","Chiapas","Baja California"],
+    phrases:[
+      {label:"Hello",        native:"Hola"},
+      {label:"Thank you",    native:"Gracias"},
+      {label:"Excuse me",    native:"Con permiso"},
+      {label:"Help!",        native:"¡Ayuda!"},
+      {label:"Please",       native:"Por favor"},
+      {label:"Sorry",        native:"Lo siento"},
+    ]
   },
   "Italy": {
     flag:"🇮🇹", capital:"Rome", language:"Italian", currency:"Euro (€)", population:"60M",
@@ -261,7 +349,15 @@ export const DATA = {
       "Don't be overly punctual for social dinners — arriving 15–20 minutes late is acceptable",
       "Don't wear swimwear away from the beach or pool — even in summer, cover up in towns"
     ],
-    regions:["Tuscany","Sicily","Lombardy","Rome","Venice","Naples","Sardinia"]
+    regions:["Tuscany","Sicily","Lombardy","Rome","Venice","Naples","Sardinia"],
+    phrases:[
+      {label:"Hello",        native:"Ciao / Buongiorno"},
+      {label:"Thank you",    native:"Grazie"},
+      {label:"Excuse me",    native:"Scusi"},
+      {label:"Help!",        native:"Aiuto!"},
+      {label:"Please",       native:"Per favore"},
+      {label:"Sorry",        native:"Mi dispiace"},
+    ]
   },
   "United Kingdom": {
     flag:"🇬🇧", capital:"London", language:"English", currency:"Pound Sterling (£)", population:"68M",
@@ -283,7 +379,15 @@ export const DATA = {
       "Don't order at the table in a traditional pub — go to the bar to order drinks",
       "Don't talk loudly in residential areas at night — noise complaints are taken seriously"
     ],
-    regions:["England","Scotland","Wales","Northern Ireland","London","Yorkshire","Cornwall"]
+    regions:["England","Scotland","Wales","Northern Ireland","London","Yorkshire","Cornwall"],
+    phrases:[
+      {label:"Hello",        native:"Hello"},
+      {label:"Thank you",    native:"Thank you"},
+      {label:"Excuse me",    native:"Excuse me"},
+      {label:"Help!",        native:"Help!"},
+      {label:"Please",       native:"Please"},
+      {label:"Sorry",        native:"Sorry"},
+    ]
   },
   "South Korea": {
     flag:"🇰🇷", capital:"Seoul", language:"Korean", currency:"Won (₩)", population:"52M",
@@ -305,7 +409,15 @@ export const DATA = {
       "Don't be overly casual with strangers — age and hierarchy matter significantly",
       "Don't raise your voice or show visible frustration in public"
     ],
-    regions:["Seoul","Busan","Jeju","Gyeonggi","Incheon","Gyeongju","Gangwon"]
+    regions:["Seoul","Busan","Jeju","Gyeonggi","Incheon","Gyeongju","Gangwon"],
+    phrases:[
+      {label:"Hello",        native:"안녕하세요",   romanized:"Annyeonghaseyo"},
+      {label:"Thank you",    native:"감사합니다",   romanized:"Gamsahamnida"},
+      {label:"Excuse me",    native:"실례합니다",   romanized:"Sillyehamnida"},
+      {label:"Help!",        native:"도와주세요!",  romanized:"Dowajuseyo!"},
+      {label:"Please",       native:"부탁드립니다", romanized:"Butakdeurimnida"},
+      {label:"Sorry",        native:"죄송합니다",   romanized:"Joesonghamnida"},
+    ]
   },
   "United Arab Emirates": {
     flag:"🇦🇪", capital:"Abu Dhabi", language:"Arabic", currency:"Dirham (AED)", population:"10M",
@@ -327,7 +439,15 @@ export const DATA = {
       "Don't dress revealingly outside of beach and resort areas",
       "Don't bring certain medications without a valid prescription — many are controlled substances"
     ],
-    regions:["Dubai","Abu Dhabi","Sharjah","Ajman","Ras Al Khaimah","Fujairah","Umm Al Quwain"]
+    regions:["Dubai","Abu Dhabi","Sharjah","Ajman","Ras Al Khaimah","Fujairah","Umm Al Quwain"],
+    phrases:[
+      {label:"Hello",        native:"السلام عليكم",  romanized:"As-salamu alaykum"},
+      {label:"Thank you",    native:"شكراً",          romanized:"Shukran"},
+      {label:"Excuse me",    native:"عفواً",          romanized:"Afwan"},
+      {label:"Help!",        native:"النجدة!",        romanized:"An-najda!"},
+      {label:"Please",       native:"من فضلك",        romanized:"Min fadlak"},
+      {label:"Sorry",        native:"آسف",            romanized:"Aasif"},
+    ]
   },
   "Turkey": {
     flag:"🇹🇷", capital:"Ankara", language:"Turkish", currency:"Lira (₺)", population:"85M",
@@ -349,7 +469,15 @@ export const DATA = {
       "Don't bargain aggressively or rudely — maintain a warm, friendly tone",
       "Don't discuss sensitive political topics with strangers"
     ],
-    regions:["Istanbul","Ankara","Antalya","Cappadocia","Izmir","Trabzon","Bodrum"]
+    regions:["Istanbul","Ankara","Antalya","Cappadocia","Izmir","Trabzon","Bodrum"],
+    phrases:[
+      {label:"Hello",        native:"Merhaba"},
+      {label:"Thank you",    native:"Teşekkürler"},
+      {label:"Excuse me",    native:"Affedersiniz"},
+      {label:"Help!",        native:"İmdat!"},
+      {label:"Please",       native:"Lütfen"},
+      {label:"Sorry",        native:"Özür dilerim"},
+    ]
   },
   "Indonesia": {
     flag:"🇮🇩", capital:"Jakarta", language:"Bahasa Indonesia", currency:"Rupiah (Rp)", population:"277M",
@@ -371,7 +499,15 @@ export const DATA = {
       "Don't wear shoes inside homes or temples",
       "Don't discuss religion, ethnicity, or politics carelessly — these are sensitive topics"
     ],
-    regions:["Bali","Jakarta","Java","Sumatra","Lombok","Sulawesi","Yogyakarta"]
+    regions:["Bali","Jakarta","Java","Sumatra","Lombok","Sulawesi","Yogyakarta"],
+    phrases:[
+      {label:"Hello",        native:"Halo"},
+      {label:"Thank you",    native:"Terima kasih"},
+      {label:"Excuse me",    native:"Permisi"},
+      {label:"Help!",        native:"Tolong!"},
+      {label:"Please",       native:"Tolong"},
+      {label:"Sorry",        native:"Maaf"},
+    ]
   },
   "South Africa": {
     flag:"🇿🇦", capital:"Pretoria", language:"11 official languages inc. Zulu, Xhosa, Afrikaans", currency:"Rand (ZAR)", population:"60M",
@@ -393,7 +529,15 @@ export const DATA = {
       "Don't leave valuables visible in parked cars",
       "Don't photograph military installations or sensitive government buildings"
     ],
-    regions:["Gauteng","Western Cape","KwaZulu-Natal","Eastern Cape","Limpopo","Cape Town","Durban"]
+    regions:["Gauteng","Western Cape","KwaZulu-Natal","Eastern Cape","Limpopo","Cape Town","Durban"],
+    phrases:[
+      {label:"Hello",        native:"Sawubona",   romanized:"sa-woo-BOH-na"},
+      {label:"Thank you",    native:"Ngiyabonga", romanized:"n-gee-ya-BON-ga"},
+      {label:"Excuse me",    native:"Uxolo",      romanized:"oo-SHOW-lo"},
+      {label:"Help!",        native:"Siza!",      romanized:"SEE-za!"},
+      {label:"Please",       native:"Ngicela",    romanized:"n-gee-SEH-la"},
+      {label:"Sorry",        native:"Ngiyaxolisa", romanized:"n-gee-ya-show-LEE-sa"},
+    ]
   },
   "Argentina": {
     flag:"🇦🇷", capital:"Buenos Aires", language:"Spanish", currency:"Peso (ARS)", population:"46M",
@@ -415,7 +559,15 @@ export const DATA = {
       "Don't make jokes about economic hardship — it is a serious and ongoing issue",
       "Don't call locals 'South Americans' as a catch-all — Argentine identity is very distinct"
     ],
-    regions:["Buenos Aires","Patagonia","Mendoza","Córdoba","Salta","Bariloche","Iguazú"]
+    regions:["Buenos Aires","Patagonia","Mendoza","Córdoba","Salta","Bariloche","Iguazú"],
+    phrases:[
+      {label:"Hello",        native:"Hola"},
+      {label:"Thank you",    native:"Gracias"},
+      {label:"Excuse me",    native:"Disculpe"},
+      {label:"Help!",        native:"¡Ayuda!"},
+      {label:"Please",       native:"Por favor"},
+      {label:"Sorry",        native:"Lo siento"},
+    ]
   }
 };
 
