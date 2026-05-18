@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { DATA } from "./data";
 
-export default function FavoritesMenu({ favorites, onSelect }) {
+export default function FavoritesMenu({ favorites, onSelect, onToggleFavorite }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -29,14 +29,20 @@ export default function FavoritesMenu({ favorites, onSelect }) {
             </div>
           ) : (
             favorites.map(country => (
-              <button
-                key={country}
-                className="ge-favs-item"
-                onClick={() => { onSelect({ type: "country", name: country }); setOpen(false); }}
-              >
-                <span className="ge-favs-flag">{DATA[country]?.flag ?? "🌍"}</span>
-                <span>{country}</span>
-              </button>
+              <div key={country} className="ge-favs-item">
+                <button
+                  className="ge-favs-item-main"
+                  onClick={() => { onSelect({ type: "country", name: country }); setOpen(false); }}
+                >
+                  <span className="ge-favs-flag">{DATA[country]?.flag ?? "🌍"}</span>
+                  <span>{country}</span>
+                </button>
+                <button
+                  className="ge-favs-remove"
+                  onClick={e => { e.stopPropagation(); onToggleFavorite(country); }}
+                  aria-label={`Remove ${country} from favorites`}
+                >✕</button>
+              </div>
             ))
           )}
         </div>

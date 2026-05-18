@@ -141,7 +141,7 @@ export default function App() {
             ))}
           </div>
           <button className="ge-surprise-btn" onClick={surpriseMe} title="Surprise me!">🎲</button>
-          <FavoritesMenu favorites={favorites} onSelect={handleSearchSelect} />
+          <FavoritesMenu favorites={favorites} onSelect={handleSearchSelect} onToggleFavorite={toggleFavorite} />
           <SearchBox lang={lang} onSelect={handleSearchSelect} />
           <LanguageSelector lang={lang} onChange={setLang} />
         </div>
