@@ -209,6 +209,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
   .ge-hint{bottom:16px;font-size:12px;padding:6px 14px}
 }
 
+/* ── Filter chips ────────────────────────────── */
+.ge-filter-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.ge-filter-chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--text2);font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.ge-filter-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.ge-filter-chip:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.ge-filter-empty{font-size:13px;color:var(--text2);padding:8px 0;font-style:italic}
+
 /* ── Phrases Tab ─────────────────────────────── */
 .ge-phrases-list{display:flex;flex-direction:column;gap:10px}
 .ge-phrase-row{background:var(--surface2);border-radius:10px;padding:12px 14px}
