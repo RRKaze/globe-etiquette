@@ -10,6 +10,8 @@ export default function SidePanel({
   onClose,
   onRegionClick,
   lang,
+  isFavorite,
+  onToggleFavorite,
 }) {
   const { open, country, region, isRegionView } = panelState;
   const d = country ? DATA[country] : null;
@@ -50,6 +52,15 @@ export default function SidePanel({
             </div>
           </div>
           <div className="ge-panel-header-actions">
+            {country && (
+              <button
+                className={`ge-fav-btn${isFavorite(country) ? " active" : ""}`}
+                onClick={() => onToggleFavorite(country)}
+                aria-label={isFavorite(country) ? "Remove from favorites" : "Add to favorites"}
+              >
+                {isFavorite(country) ? "★" : "☆"}
+              </button>
+            )}
             {country && (
               <button className="ge-copy-btn" onClick={handleCopyLink}>
                 {copied ? t(lang, "copied") : t(lang, "copyLink")}

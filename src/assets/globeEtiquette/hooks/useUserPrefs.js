@@ -67,5 +67,19 @@ export function useUserPrefs() {
     prefs.added?.[country]?.[tab] ?? [],
   [prefs]);
 
-  return { isHidden, toggleHidden, addItem, removeAdded, getAdded };
+  const isFavorite = useCallback(country =>
+    (prefs.favorites ?? []).includes(country),
+  [prefs]);
+
+  const toggleFavorite = useCallback(country => {
+    update(prev => {
+      const favs = prev.favorites ?? [];
+      const next = favs.includes(country) ? favs.filter(c => c !== country) : [...favs, country];
+      return { ...prev, favorites: next };
+    });
+  }, [update]);
+
+  const favorites = prefs.favorites ?? [];
+
+  return { isHidden, toggleHidden, addItem, removeAdded, getAdded, isFavorite, toggleFavorite, favorites };
 }
