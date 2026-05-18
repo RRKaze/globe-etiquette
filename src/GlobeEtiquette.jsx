@@ -76,6 +76,14 @@ export default function App() {
     setPanelState(s => ({ ...s, open: false }));
   }, []);
 
+  useEffect(() => {
+    const handler = e => {
+      if (e.key === "Escape" && panelState.open) closePanel();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [panelState.open, closePanel]);
+
   const resetView = useCallback(() => {
     mapRef.current?.setView([20, 0], 2);
     setZoomed(false);
