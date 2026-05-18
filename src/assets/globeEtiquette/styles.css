@@ -72,6 +72,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-sug-item strong{color:var(--accent);font-weight:500}
 .ge-sug-item small{color:var(--text2);font-size:11px;margin-left:auto}
 
+/* ── Surprise me button ──────────────────────── */
+.ge-surprise-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0}
+.ge-surprise-btn:hover{border-color:var(--accent);transform:rotate(30deg) scale(1.1)}
+
 /* ── Favorites menu ──────────────────────────── */
 .ge-favs{position:relative;flex-shrink:0}
 .ge-favs-trigger{display:flex;align-items:center;gap:5px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:16px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;line-height:1}

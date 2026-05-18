@@ -97,6 +97,12 @@ export default function App() {
     }
   }, [openRegion]);
 
+  const surpriseMe = useCallback(() => {
+    const countries = Object.keys(DATA);
+    const pick = countries[Math.floor(Math.random() * countries.length)];
+    handleSearchSelect({ type: "country", name: pick });
+  }, [handleSearchSelect]);
+
   const themeOptions = [
     { key: "day",    label: "☀️ Day"    },
     { key: "night",  label: "🌙 Night"  },
@@ -126,6 +132,7 @@ export default function App() {
               </button>
             ))}
           </div>
+          <button className="ge-surprise-btn" onClick={surpriseMe} title="Surprise me!">🎲</button>
           <FavoritesMenu favorites={favorites} onSelect={handleSearchSelect} />
           <SearchBox lang={lang} onSelect={handleSearchSelect} />
           <LanguageSelector lang={lang} onChange={setLang} />
