@@ -72,6 +72,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-sug-item strong{color:var(--accent);font-weight:500}
 .ge-sug-item small{color:var(--text2);font-size:11px;margin-left:auto}
 
+/* ── Favorites menu ──────────────────────────── */
+.ge-favs{position:relative;flex-shrink:0}
+.ge-favs-trigger{display:flex;align-items:center;gap:5px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:16px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;line-height:1}
+.ge-favs-trigger:hover,.ge-favs-trigger.open{border-color:#f5a623;color:#f5a623}
+.ge-favs-badge{font-size:11px;font-weight:600;background:var(--accent);color:#fff;border-radius:10px;padding:0 5px;line-height:16px}
+.ge-favs-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:9999;min-width:200px;max-height:300px;overflow-y:auto;box-shadow:var(--shadow)}
+.ge-favs-empty{padding:16px;font-size:13px;color:var(--text2);text-align:center;line-height:1.6}
+.ge-favs-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 16px;background:none;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .15s;text-align:left}
+.ge-favs-item:last-child{border-bottom:none}
+.ge-favs-item:hover{background:var(--surface2)}
+.ge-favs-flag{font-size:16px;flex-shrink:0}
+
+/* ── Favorite button (panel header) ─────────── */
+.ge-fav-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0;line-height:1}
+.ge-fav-btn:hover{border-color:#f5a623;color:#f5a623}
+.ge-fav-btn.active{border-color:#f5a623;color:#f5a623;background:rgba(245,166,35,0.12)}
+
 /* ── Language selector ───────────────────────── */
 .ge-lang{position:relative;flex-shrink:0}
 .ge-lang-btn{display:flex;align-items:center;gap:6px;padding:7px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:border-color .18s;white-space:nowrap}

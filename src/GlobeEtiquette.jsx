@@ -7,6 +7,8 @@ import SearchBox from "./assets/globeEtiquette/SearchBox";
 import MapPane from "./assets/globeEtiquette/MapPane";
 import SidePanel from "./assets/globeEtiquette/SidePanel";
 import LanguageSelector from "./assets/globeEtiquette/LanguageSelector";
+import FavoritesMenu from "./assets/globeEtiquette/FavoritesMenu";
+import { useUserPrefs } from "./assets/globeEtiquette/hooks/useUserPrefs";
 
 export default function App() {
   const [theme, setTheme] = useState("night");
@@ -26,6 +28,7 @@ export default function App() {
   });
   const mapRef = useRef(null);
   const geoLayerRef = useRef(null);
+  const { isFavorite, toggleFavorite, favorites } = useUserPrefs();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -123,6 +126,7 @@ export default function App() {
               </button>
             ))}
           </div>
+          <FavoritesMenu favorites={favorites} onSelect={handleSearchSelect} />
           <SearchBox lang={lang} onSelect={handleSearchSelect} />
           <LanguageSelector lang={lang} onChange={setLang} />
         </div>
@@ -154,6 +158,8 @@ export default function App() {
         onClose={closePanel}
         onRegionClick={openRegion}
         lang={lang}
+        isFavorite={isFavorite}
+        onToggleFavorite={toggleFavorite}
       />
     </div>
   );
