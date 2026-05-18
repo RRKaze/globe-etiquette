@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { DATA } from "./data";
 
-export default function FavoritesMenu({ favorites, onSelect, onToggleFavorite }) {
+export default function FavoritesMenu({ favorites, recentlyViewed, onSelect, onToggleFavorite }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
@@ -44,6 +44,22 @@ export default function FavoritesMenu({ favorites, onSelect, onToggleFavorite })
                 >✕</button>
               </div>
             ))
+          )}
+          {recentlyViewed.filter(c => !favorites.includes(c)).length > 0 && (
+            <>
+              <div className="ge-favs-section-label">Recently Viewed</div>
+              {recentlyViewed.filter(c => !favorites.includes(c)).map(country => (
+                <div key={country} className="ge-favs-item ge-favs-item-recent">
+                  <button
+                    className="ge-favs-item-main"
+                    onClick={() => { onSelect({ type: "country", name: country }); setOpen(false); }}
+                  >
+                    <span className="ge-favs-flag">{DATA[country]?.flag ?? "🌍"}</span>
+                    <span>{country}</span>
+                  </button>
+                </div>
+              ))}
+            </>
           )}
         </div>
       )}

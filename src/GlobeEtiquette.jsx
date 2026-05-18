@@ -28,11 +28,17 @@ export default function App() {
   });
   const mapRef = useRef(null);
   const geoLayerRef = useRef(null);
-  const { isFavorite, toggleFavorite, favorites } = useUserPrefs();
+  const { isFavorite, toggleFavorite, favorites, addRecent, recentlyViewed } = useUserPrefs();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
+
+  // Track deeplink country on initial load
+  useEffect(() => {
+    if (panelState.country) addRecent(panelState.country);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -63,9 +69,11 @@ export default function App() {
       }
     }
     setZoomed(true);
-    setPanelState({ open: true, country: match ?? name, region: null, isRegionView: false });
+    const resolved = match ?? name;
+    setPanelState({ open: true, country: resolved, region: null, isRegionView: false });
     setActiveTab("guide");
-  }, []);
+    addRecent(resolved);
+  }, [addRecent]);
 
   const openRegion = useCallback((region, country) => {
     setPanelState({ open: true, country, region, isRegionView: true });
@@ -97,13 +105,14 @@ export default function App() {
       setZoomed(true);
       setPanelState({ open: true, country: item.name, region: null, isRegionView: false });
       setActiveTab("guide");
+      addRecent(item.name);
     } else {
       const coords = COUNTRY_COORDS[item.country];
       if (coords) mapRef.current?.setView([coords[0], coords[1]], coords[2]);
       setZoomed(true);
       openRegion(item.name, item.country);
     }
-  }, [openRegion]);
+  }, [openRegion, addRecent]);
 
   const surpriseMe = useCallback(() => {
     const countries = Object.keys(DATA);
@@ -141,7 +150,7 @@ export default function App() {
             ))}
           </div>
           <button className="ge-surprise-btn" onClick={surpriseMe} title="Surprise me!">🎲</button>
-          <FavoritesMenu favorites={favorites} onSelect={handleSearchSelect} onToggleFavorite={toggleFavorite} />
+          <FavoritesMenu favorites={favorites} recentlyViewed={recentlyViewed} onSelect={handleSearchSelect} onToggleFavorite={toggleFavorite} />
           <SearchBox lang={lang} onSelect={handleSearchSelect} />
           <LanguageSelector lang={lang} onChange={setLang} />
         </div>

@@ -90,6 +90,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-favs-remove{display:flex;align-items:center;justify-content:center;padding:0 12px;height:100%;background:none;border:none;color:var(--text2);font-size:11px;cursor:pointer;transition:color .15s;flex-shrink:0}
 .ge-favs-remove:hover{color:var(--dont)}
 .ge-favs-flag{font-size:16px;flex-shrink:0}
+.ge-favs-section-label{padding:6px 16px 4px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);border-top:1px solid var(--border);background:var(--surface2)}
+.ge-favs-item-recent .ge-favs-item-main{color:var(--text2)}
 
 /* ── Favorite button (panel header) ─────────── */
 .ge-fav-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0;line-height:1}
