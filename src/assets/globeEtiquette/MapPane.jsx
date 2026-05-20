@@ -1,7 +1,17 @@
 import { useEffect, useRef, useCallback, useState } from "react";
-import { TILES } from "./data";
+import { TILES, COUNTRY_ISO3 } from "./data";
 import { getEffectiveTileTheme } from "./helpers";
 import { t } from "./i18n";
+
+let adminGeoCache = null;
+async function fetchAdminGeo() {
+  if (adminGeoCache) return adminGeoCache;
+  const r = await fetch(
+    "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_10m_admin_1_states_provinces.geojson"
+  );
+  adminGeoCache = await r.json();
+  return adminGeoCache;
+}
 
 function shiftGeoJSON(geojson, offset) {
   function shiftCoord(coord) { return [coord[0] + offset, coord[1]]; }
@@ -43,11 +53,13 @@ function fixAntimeridian(geojson) {
   return { ...geojson, features: geojson.features.map(f => ({ ...f, geometry: fixGeom(f.geometry) })) };
 }
 
-export default function MapPane({ lang, theme, onCountryOpen, mapRef, geoLayerRef, initialCountry }) {
+export default function MapPane({ lang, theme, onCountryOpen, mapRef, geoLayerRef, initialCountry, activeCountry, onRegionOpen }) {
   const containerRef = useRef(null);
   const leafletLoadedRef = useRef(false);
   const initialCountryRef = useRef(initialCountry);
+  const adminLayerRef = useRef(null);
   const [loading, setLoading] = useState(true);
+  const [mapReady, setMapReady] = useState(false);
 
   const effectiveTileTheme = useCallback(() => getEffectiveTileTheme(theme), [theme]);
 
@@ -64,6 +76,54 @@ export default function MapPane({ lang, theme, onCountryOpen, mapRef, geoLayerRe
   useEffect(() => {
     if (leafletLoadedRef.current) applyTheme();
   }, [theme, applyTheme]);
+
+  // Load state/province boundaries when a country is selected
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (adminLayerRef.current && map) {
+      map.removeLayer(adminLayerRef.current);
+      adminLayerRef.current = null;
+    }
+
+    if (!activeCountry || !mapReady || !map) return;
+
+    const iso3 = COUNTRY_ISO3[activeCountry];
+    if (!iso3) return;
+
+    const th = TILES[getEffectiveTileTheme(document.documentElement.getAttribute("data-theme") || "night")];
+
+    fetchAdminGeo().then(geo => {
+      if (!mapRef.current) return;
+      const filtered = {
+        ...geo,
+        features: geo.features.filter(f => f.properties.adm0_a3 === iso3),
+      };
+      if (!filtered.features.length) return;
+
+      const layer = window.L.geoJSON(filtered, {
+        style: {
+          weight: 1.5,
+          color: th.hover,
+          opacity: 0.4,
+          fillColor: "transparent",
+          fillOpacity: 0,
+          dashArray: "5 4",
+        },
+        onEachFeature: (f, l) => {
+          const regionName = f.properties.name || f.properties.NAME_1 || "";
+          l.bindTooltip(regionName, { sticky: true, className: "ge-admin-tooltip" });
+          l.on("click", () => {
+            if (onRegionOpen) onRegionOpen(regionName, activeCountry);
+          });
+          l.on("mouseover", () => l.setStyle({ weight: 2, opacity: 0.8, fillOpacity: 0.1, fillColor: th.hover }));
+          l.on("mouseout",  () => l.setStyle({ weight: 1.5, opacity: 0.4, fillOpacity: 0, fillColor: "transparent" }));
+        },
+      });
+      layer.addTo(mapRef.current);
+      adminLayerRef.current = layer;
+    }).catch(() => {});
+  }, [activeCountry, mapReady, mapRef, onRegionOpen]);
 
   useEffect(() => {
     if (leafletLoadedRef.current) return;
@@ -82,6 +142,7 @@ export default function MapPane({ lang, theme, onCountryOpen, mapRef, geoLayerRe
         maxBoundsViscosity: 1.0,
       });
       mapRef.current = map;
+      setMapReady(true);
       L.control.zoom({ position: "bottomright" }).addTo(map);
 
       fetch("https://raw.githubusercontent.com/datasets/geo-countries/master/data/countries.geojson")
@@ -120,9 +181,13 @@ export default function MapPane({ lang, theme, onCountryOpen, mapRef, geoLayerRe
 
           // Zoom to deeplink country after GeoJSON is ready (center layer only)
           if (initialCountryRef.current) {
+            const target = initialCountryRef.current.toLowerCase();
+            let found = false;
             layer.eachLayer(sublayer => {
-              const name = sublayer.feature.properties.ADMIN || sublayer.feature.properties.name;
-              if (name.toLowerCase() === initialCountryRef.current.toLowerCase()) {
+              if (found) return;
+              const geoName = (sublayer.feature.properties.ADMIN || sublayer.feature.properties.name || "").toLowerCase();
+              if (geoName === target || geoName.includes(target) || target.includes(geoName)) {
+                found = true;
                 const bounds = sublayer.getBounds();
                 const rawZoom = map.getBoundsZoom(bounds);
                 if (rawZoom < 3) {
