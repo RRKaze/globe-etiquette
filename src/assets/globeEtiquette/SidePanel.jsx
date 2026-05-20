@@ -55,27 +55,23 @@ export default function SidePanel({
               </div>
             </div>
           </div>
-          <div className="ge-panel-header-actions">
-            {country && (
-              <button
-                className={`ge-fav-btn${isFavorite(country) ? " active" : ""}`}
-                onClick={() => onToggleFavorite(country)}
-                aria-label={isFavorite(country) ? "Remove from favorites" : "Add to favorites"}
-              >
-                {isFavorite(country) ? "★" : "☆"}
-              </button>
-            )}
-            {country && (
-              <button className="ge-copy-btn" onClick={() => setCompareOpen(true)}>⚖ Compare</button>
-            )}
-            {country && (
-              <button className="ge-copy-btn" onClick={handleCopyLink}>
-                {copied ? t(lang, "copied") : t(lang, "copyLink")}
-              </button>
-            )}
-            <button className="ge-close-btn" onClick={onClose} aria-label="Close">✕</button>
-          </div>
+          <button className="ge-close-btn" onClick={onClose} aria-label="Close">✕</button>
         </div>
+        {country && (
+          <div className="ge-panel-header-actions">
+            <button
+              className={`ge-fav-btn${isFavorite(country) ? " active" : ""}`}
+              onClick={() => onToggleFavorite(country)}
+              aria-label={isFavorite(country) ? "Remove from favorites" : "Add to favorites"}
+            >
+              {isFavorite(country) ? "★" : "☆"}
+            </button>
+            <button className="ge-copy-btn" onClick={() => setCompareOpen(true)}>⚖ Compare</button>
+            <button className="ge-copy-btn" onClick={handleCopyLink}>
+              {copied ? t(lang, "copied") : t(lang, "copyLink")}
+            </button>
+          </div>
+        )}
       </div>
 
       {/* ── Tabs ── */}
