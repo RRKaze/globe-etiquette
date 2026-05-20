@@ -142,8 +142,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-close-btn:hover{border-color:var(--dont);color:var(--dont)}
 
 /* Tabs */
-.ge-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;padding:0 20px}
-.ge-tab{padding:11px 14px;font-size:13px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.3px;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.ge-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;padding:0 20px;overflow-x:auto;scrollbar-width:none}
+.ge-tabs::-webkit-scrollbar{display:none}
+.ge-tab{padding:11px 12px;font-size:12.5px;cursor:pointer;color:var(--text2);border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.2px;background:none;border-top:none;border-left:none;border-right:none;font-family:'DM Sans',sans-serif;white-space:nowrap;flex-shrink:0}
 .ge-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .ge-tab:hover:not(.active){color:var(--text)}
 
