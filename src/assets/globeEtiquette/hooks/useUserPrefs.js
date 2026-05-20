@@ -67,6 +67,15 @@ export function useUserPrefs() {
     prefs.added?.[country]?.[tab] ?? [],
   [prefs]);
 
+  const addRecent = useCallback(country => {
+    update(prev => {
+      const recent = (prev.recentlyViewed ?? []).filter(c => c !== country);
+      return { ...prev, recentlyViewed: [country, ...recent].slice(0, 5) };
+    });
+  }, [update]);
+
+  const recentlyViewed = prefs.recentlyViewed ?? [];
+
   const isFavorite = useCallback(country =>
     (prefs.favorites ?? []).includes(country),
   [prefs]);
@@ -81,5 +90,5 @@ export function useUserPrefs() {
 
   const favorites = prefs.favorites ?? [];
 
-  return { isHidden, toggleHidden, addItem, removeAdded, getAdded, isFavorite, toggleFavorite, favorites };
+  return { isHidden, toggleHidden, addItem, removeAdded, getAdded, isFavorite, toggleFavorite, favorites, addRecent, recentlyViewed };
 }

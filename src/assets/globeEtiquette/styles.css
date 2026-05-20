@@ -72,6 +72,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-sug-item strong{color:var(--accent);font-weight:500}
 .ge-sug-item small{color:var(--text2);font-size:11px;margin-left:auto}
 
+/* ── Surprise me button ──────────────────────── */
+.ge-surprise-btn{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0}
+.ge-surprise-btn:hover{border-color:var(--accent);transform:rotate(30deg) scale(1.1)}
+
 /* ── Favorites menu ──────────────────────────── */
 .ge-favs{position:relative;flex-shrink:0}
 .ge-favs-trigger{display:flex;align-items:center;gap:5px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:16px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;line-height:1}
@@ -79,10 +83,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-favs-badge{font-size:11px;font-weight:600;background:var(--accent);color:#fff;border-radius:10px;padding:0 5px;line-height:16px}
 .ge-favs-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:9999;min-width:200px;max-height:300px;overflow-y:auto;box-shadow:var(--shadow)}
 .ge-favs-empty{padding:16px;font-size:13px;color:var(--text2);text-align:center;line-height:1.6}
-.ge-favs-item{display:flex;align-items:center;gap:10px;width:100%;padding:10px 16px;background:none;border:none;border-bottom:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:background .15s;text-align:left}
+.ge-favs-item{display:flex;align-items:center;border-bottom:1px solid var(--border);transition:background .15s}
 .ge-favs-item:last-child{border-bottom:none}
 .ge-favs-item:hover{background:var(--surface2)}
+.ge-favs-item-main{display:flex;align-items:center;gap:10px;flex:1;padding:10px 16px;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;text-align:left}
+.ge-favs-remove{display:flex;align-items:center;justify-content:center;padding:0 12px;height:100%;background:none;border:none;color:var(--text2);font-size:11px;cursor:pointer;transition:color .15s;flex-shrink:0}
+.ge-favs-remove:hover{color:var(--dont)}
 .ge-favs-flag{font-size:16px;flex-shrink:0}
+.ge-favs-section-label{padding:6px 16px 4px;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);border-top:1px solid var(--border);background:var(--surface2)}
+.ge-favs-item-recent .ge-favs-item-main{color:var(--text2)}
 
 /* ── Favorite button (panel header) ─────────── */
 .ge-fav-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0;line-height:1}
@@ -199,3 +208,34 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
   .ge-globe-btn{left:12px;bottom:16px;font-size:13px;padding:8px 14px}
   .ge-hint{bottom:16px;font-size:12px;padding:6px 14px}
 }
+
+/* ── Filter chips ────────────────────────────── */
+.ge-filter-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.ge-filter-chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border);background:none;color:var(--text2);font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s;letter-spacing:.3px}
+.ge-filter-chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.ge-filter-chip:hover:not(.active){border-color:var(--accent);color:var(--accent)}
+.ge-filter-empty{font-size:13px;color:var(--text2);padding:8px 0;font-style:italic}
+
+/* ── Phrases Tab ─────────────────────────────── */
+.ge-phrases-list{display:flex;flex-direction:column;gap:10px}
+.ge-phrase-row{background:var(--surface2);border-radius:10px;padding:12px 14px}
+.ge-phrase-label{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text2);margin-bottom:4px}
+.ge-phrase-native{font-size:17px;color:var(--text);font-weight:500}
+.ge-phrase-romanized{font-size:12px;color:var(--text2);margin-top:3px;font-style:italic}
+
+/* ── Compare modal ───────────────────────────── */
+.ge-compare-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.ge-compare-modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:900px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow)}
+.ge-compare-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.ge-compare-title{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)}
+.ge-compare-body{display:flex;flex:1;overflow:hidden}
+.ge-compare-col{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px}
+.ge-compare-col::-webkit-scrollbar{width:4px}
+.ge-compare-col::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.ge-compare-divider{width:1px;background:var(--border);flex-shrink:0}
+.ge-compare-col-header{display:flex;align-items:center;gap:10px;padding-bottom:4px}
+.ge-compare-flag{font-size:24px}
+.ge-compare-name{font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)}
+.ge-compare-select{width:100%;padding:8px 12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;cursor:pointer;flex-shrink:0}
+.ge-compare-guide{display:flex;flex-direction:column;gap:0}
+.ge-compare-empty{font-size:13px;color:var(--text2);line-height:1.6;padding:8px 0}

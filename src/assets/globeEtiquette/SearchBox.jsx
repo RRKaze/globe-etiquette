@@ -9,6 +9,18 @@ export default function SearchBox({ lang, onSelect }) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const wrapRef = useRef(null);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    const handler = e => {
+      if (e.key === "/" && document.activeElement !== inputRef.current) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   useEffect(() => {
     const results = buildSuggestions(query);
@@ -57,6 +69,7 @@ export default function SearchBox({ lang, onSelect }) {
     <div className="ge-search" ref={wrapRef}>
       <span className="ge-search-icon">🔍</span>
       <input
+        ref={inputRef}
         type="text"
         placeholder={t(lang, "search")}
         value={query}
