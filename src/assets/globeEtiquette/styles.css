@@ -78,7 +78,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 
 /* ── Favorites menu ──────────────────────────── */
 .ge-favs{position:relative;flex-shrink:0}
-.ge-favs-trigger{display:flex;align-items:center;gap:5px;padding:7px 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:16px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;line-height:1}
+.ge-favs-trigger{display:flex;align-items:center;gap:5px;height:36px;padding:0 10px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text2);font-size:16px;cursor:pointer;transition:all .18s;font-family:'DM Sans',sans-serif;line-height:1}
 .ge-favs-trigger:hover,.ge-favs-trigger.open{border-color:#f5a623;color:#f5a623}
 .ge-favs-badge{font-size:11px;font-weight:600;background:var(--accent);color:#fff;border-radius:10px;padding:0 5px;line-height:16px}
 .ge-favs-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;z-index:9999;min-width:200px;max-height:300px;overflow-y:auto;box-shadow:var(--shadow)}
@@ -94,7 +94,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-favs-item-recent .ge-favs-item-main{color:var(--text2)}
 
 /* ── Favorite button (panel header) ─────────── */
-.ge-fav-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:16px;transition:all .2s;flex-shrink:0;line-height:1}
+.ge-fav-btn{display:flex;align-items:center;justify-content:center;height:30px;min-width:30px;padding:0 8px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:14px;transition:all .2s;flex-shrink:0;line-height:1;font-family:'DM Sans',sans-serif}
 .ge-fav-btn:hover{border-color:#f5a623;color:#f5a623}
 .ge-fav-btn.active{border-color:#f5a623;color:#f5a623;background:rgba(245,166,35,0.12)}
 
@@ -136,7 +136,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .ge-panel-region{font-size:12px;color:var(--text2);margin-top:2px}
 .ge-panel-header-actions{display:flex;align-items:center;gap:6px}
 
-.ge-copy-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--text2);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.ge-copy-btn{display:flex;align-items:center;gap:5px;background:none;border:1px solid var(--border);border-radius:8px;height:30px;padding:0 10px;color:var(--text2);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
 .ge-copy-btn:hover{border-color:var(--accent);color:var(--accent)}
 .ge-close-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:14px;transition:all .2s;flex-shrink:0}
 .ge-close-btn:hover{border-color:var(--dont);color:var(--dont)}
@@ -190,6 +190,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);tra
 .leaflet-tooltip.ge-country-label-lg{font-size:12px;letter-spacing:1.2px}
 .leaflet-tooltip.ge-country-label-md{font-size:10px;letter-spacing:0.8px}
 .leaflet-tooltip.ge-country-label-sm{font-size:9px;letter-spacing:0.4px}
+.leaflet-tooltip.ge-admin-tooltip{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:11px;padding:3px 8px;box-shadow:var(--shadow);pointer-events:none}
+.leaflet-tooltip.ge-admin-tooltip::before{display:none}
 
 /* ── Map loading overlay ─────────────────────── */
 .ge-map-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:var(--bg);opacity:.9;pointer-events:none;z-index:500}

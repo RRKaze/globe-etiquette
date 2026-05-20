@@ -40,6 +40,16 @@ export default function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Zoom to deeplink country once the map is ready
+  useEffect(() => {
+    if (!panelState.country || !mapRef.current) return;
+    const coords = COUNTRY_COORDS[panelState.country];
+    if (coords) {
+      mapRef.current.setView([coords[0], coords[1]], coords[2], { animate: false });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     const url = new URL(window.location.href);
     if (panelState.country) url.searchParams.set("country", panelState.country);
@@ -121,9 +131,8 @@ export default function App() {
   }, [handleSearchSelect]);
 
   const themeOptions = [
-    { key: "day",    label: "☀️ Day"    },
-    { key: "night",  label: "🌙 Night"  },
-    { key: "system", label: "⚙️ System" },
+    { key: "day",   label: "☀️ Day"   },
+    { key: "night", label: "🌙 Night" },
   ];
 
   return (
@@ -163,6 +172,8 @@ export default function App() {
         mapRef={mapRef}
         geoLayerRef={geoLayerRef}
         initialCountry={panelState.country}
+        activeCountry={panelState.open ? panelState.country : null}
+        onRegionOpen={openRegion}
       />
 
       <div className={`ge-hint${zoomed ? " hidden" : ""}`}>
