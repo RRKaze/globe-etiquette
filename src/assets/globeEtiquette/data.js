@@ -571,6 +571,13 @@ export const DATA = {
   }
 };
 
+export const COUNTRY_ISO3 = {
+  "Japan":"JPN","France":"FRA","India":"IND","United States":"USA","Brazil":"BRA",
+  "Saudi Arabia":"SAU","Germany":"DEU","Thailand":"THA","China":"CHN","Australia":"AUS",
+  "Mexico":"MEX","Italy":"ITA","United Kingdom":"GBR","South Korea":"KOR",
+  "United Arab Emirates":"ARE","Turkey":"TUR","Indonesia":"IDN","South Africa":"ZAF","Argentina":"ARG",
+};
+
 export const COUNTRY_COORDS = {
   "Japan":[35.7,139.7,5],"France":[46.2,2.2,5],"India":[20.6,78.9,4],
   "United States":[38,-97,4],"Brazil":[-10,-55,4],"Saudi Arabia":[24,45,5],
